@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Suppu's Tiny Universe 🌸</title>
+  <link rel="stylesheet" href="style.css" />
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Quicksand:wght@300;400;500;600&family=Dancing+Script:wght@400;700&display=swap" rel="stylesheet" />
+</head>
+<body>
+
+  <!-- ==============================
+       CANVAS: Three.js 3D Scroll Scene
+       ============================== -->
+  <canvas id="three-canvas"></canvas>
+
+  <!-- ==============================
+       LOADING SCREEN
+       ============================== -->
+  <div id="loader">
+    <div class="loader-yarn-ball">
+      <svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="40" cy="40" r="30" fill="none" stroke="#f9a8c9" stroke-width="2"/>
+        <path d="M20,40 Q40,10 60,40 Q40,70 20,40" fill="none" stroke="#f9a8c9" stroke-width="1.5"/>
+        <path d="M15,30 Q40,50 65,30" fill="none" stroke="#f9a8c9" stroke-width="1.5"/>
+        <path d="M15,50 Q40,30 65,50" fill="none" stroke="#f9a8c9" stroke-width="1.5"/>
+        <circle cx="40" cy="40" r="5" fill="#f9a8c9"/>
+      </svg>
+    </div>
+    <p class="loader-text">Spinning your universe…</p>
+  </div>
+
+  <!-- ==============================
+       AUDIO PLAYER
+       ============================== -->
+  <div id="audio-player" class="hidden">
+    <div class="audio-inner">
+      <div class="audio-info">
+        <span class="audio-note">♪</span>
+        <div>
+          <p class="audio-title">Just The Way You Are</p>
+          <p class="audio-artist">Milky Chance</p>
+        </div>
+      </div>
+      <div class="audio-controls">
+        <button id="audio-play-btn" title="Play/Pause">▶</button>
+        <button id="audio-mute-btn" title="Mute">🔊</button>
+      </div>
+    </div>
+    <!-- REPLACE src with your actual audio file path -->
+    <audio id="bg-audio" loop>
+      <source src="just_the_way_you_are_milky_chance.mp3" type="audio/mpeg" />
+      <!-- AUDIO FILE: just_the_way_you_are_milky_chance.mp3 — place in same folder as index.html -->
+    </audio>
+  </div>
+
+  <!-- ==============================
+       SCROLL CONTAINER (layered over canvas)
+       ============================== -->
+  <div id="scroll-container">
+
+    <!-- ===== ACT 1: ENTRANCE ===== -->
+    <section id="act1" class="act act-entrance">
+      <div class="yarn-ball-intro" id="yarn-intro">
+        <svg id="yarn-svg" viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+          <g id="yarn-group">
+            <circle cx="60" cy="60" r="45" fill="none" stroke="#f9a8c9" stroke-width="2.5"/>
+            <path d="M25,60 Q60,15 95,60 Q60,105 25,60" fill="none" stroke="#f9a8c9" stroke-width="2"/>
+            <path d="M18,45 Q60,70 102,45" fill="none" stroke="#f9a8c9" stroke-width="2"/>
+            <path d="M18,75 Q60,50 102,75" fill="none" stroke="#f9a8c9" stroke-width="2"/>
+            <path d="M35,20 Q60,80 85,20" fill="none" stroke="#f9a8c9" stroke-width="1.5"/>
+            <path d="M35,100 Q60,40 85,100" fill="none" stroke="#f9a8c9" stroke-width="1.5"/>
+            <circle cx="60" cy="60" r="8" fill="#f9a8c9"/>
+          </g>
+        </svg>
+      </div>
+
+      <!-- Handwritten title reveal -->
+      <div class="act1-title" id="act1-title">
+        <svg id="title-svg" viewBox="0 0 800 200" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
+          <text x="50%" y="60%" text-anchor="middle" class="title-text-svg" fill="none" stroke="#f9a8c9" stroke-width="1">Suppu's Tiny Universe</text>
+        </svg>
+        <p class="act1-subtitle">A universe handcrafted just for you ✨</p>
+      </div>
+
+      <div class="scroll-hint">
+        <span>scroll to begin</span>
+        <div class="scroll-line"></div>
+      </div>
+    </section>
+
+    <!-- ===== ACT 2: MEMORIES ===== -->
+    <section id="act2" class="act act-memories">
+      <div class="thread-connector thread-left"></div>
+
+      <h2 class="act-heading reveal-text">Once upon a time…</h2>
+      <p class="act-sub reveal-text">A tiny, wonderful person came into the world.</p>
+
+      <div class="memory-grid">
+
+        <!-- MEMORY CARD 1 -->
+        <div class="memory-card reveal-card" data-delay="0">
+          <div class="card-frame">
+            <div class="img-placeholder">
+              <!-- IMAGE: baby_suppu.jpg — Replace the div below with: <img src="baby_suppu.jpg" alt="Baby Suppu"> -->
+              <div class="ph-label">baby_suppu.jpg</div>
+              <div class="ph-icon">👶</div>
+            </div>
+            <div class="card-caption">The beginning of everything</div>
+          </div>
+          <div class="card-doodle">✿</div>
+        </div>
+
+        <!-- MEMORY CARD 2 -->
+        <div class="memory-card reveal-card" data-delay="150">
+          <div class="card-frame">
+            <div class="img-placeholder">
+              <!-- IMAGE: walking_1.jpg — Replace with: <img src="walking_1.jpg" alt="Suppu walking"> -->
+              <div class="ph-label">walking_1.jpg</div>
+              <div class="ph-icon">🌸</div>
+            </div>
+            <div class="card-caption">Every step, a little story</div>
+          </div>
+          <div class="card-doodle">⋆</div>
+        </div>
+
+        <!-- MEMORY CARD 3 -->
+        <div class="memory-card reveal-card" data-delay="300">
+          <div class="card-frame">
+            <div class="img-placeholder">
+              <!-- IMAGE: walking_2.jpg — Replace with: <img src="walking_2.jpg" alt="Suppu walking"> -->
+              <div class="ph-label">walking_2.jpg</div>
+              <div class="ph-icon">🌷</div>
+            </div>
+            <div class="card-caption">Wandering through wonder</div>
+          </div>
+          <div class="card-doodle">❀</div>
+        </div>
+
+      </div>
+
+      <!-- White dress photos -->
+      <div class="memory-feature reveal-card" data-delay="0">
+        <div class="feature-frame">
+          <div class="img-placeholder large">
+            <!-- IMAGE: white_dress_1.jpg — Replace with: <img src="white_dress_1.jpg" alt="Suppu white dress"> -->
+            <div class="ph-label">white_dress_1.jpg</div>
+            <div class="ph-icon">🤍</div>
+          </div>
+        </div>
+        <div class="feature-text">
+          <p class="quote-text">"You carry grace in everything you do."</p>
+        </div>
+        <div class="feature-frame">
+          <div class="img-placeholder large">
+            <!-- IMAGE: white_dress_2.jpg — Replace with: <img src="white_dress_2.jpg" alt="Suppu white dress 2"> -->
+            <div class="ph-label">white_dress_2.jpg</div>
+            <div class="ph-icon">🌼</div>
+          </div>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- ===== ACT 3: TIMELINE ===== -->
+    <section id="act3" class="act act-timeline">
+      <h2 class="act-heading reveal-text">Two Stories. One Thread.</h2>
+      <p class="act-sub reveal-text">Two separate worlds, drifting closer.</p>
+
+      <div class="timeline-wrapper">
+
+        <div class="timeline-track left-track">
+          <div class="tl-node reveal-card" data-delay="0">
+            <div class="tl-frame">
+              <div class="img-placeholder tl-img">
+                <!-- IMAGE: baby_john.jpg — Replace with: <img src="baby_john.jpg" alt="Baby John"> -->
+                <div class="ph-label">baby_john.jpg</div>
+                <div class="ph-icon">🍼</div>
+              </div>
+            </div>
+            <p class="tl-label">His story begins…</p>
+          </div>
+
+          <div class="tl-node reveal-card" data-delay="200">
+            <div class="tl-frame">
+              <div class="img-placeholder tl-img">
+                <!-- IMAGE: couple_1.jpg — Replace with: <img src="couple_1.jpg" alt="Couple photo"> -->
+                <div class="ph-label">couple_1.jpg</div>
+                <div class="ph-icon">💛</div>
+              </div>
+            </div>
+            <p class="tl-label">Paths crossing</p>
+          </div>
+        </div>
+
+        <div class="timeline-thread-center">
+          <svg viewBox="0 0 60 600" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+            <path id="timeline-thread" d="M30,0 Q10,150 30,300 Q50,450 30,600" fill="none" stroke="#f9a8c9" stroke-width="2.5" stroke-dasharray="800" stroke-dashoffset="800"/>
+          </svg>
+        </div>
+
+        <div class="timeline-track right-track">
+          <div class="tl-node reveal-card" data-delay="100">
+            <div class="tl-frame">
+              <div class="img-placeholder tl-img">
+                <!-- IMAGE: baby_suppu.jpg — Replace with: <img src="baby_suppu.jpg" alt="Baby Suppu"> -->
+                <div class="ph-label">baby_suppu.jpg</div>
+                <div class="ph-icon">🌸</div>
+              </div>
+            </div>
+            <p class="tl-label">Her story begins…</p>
+          </div>
+
+          <div class="tl-node reveal-card" data-delay="300">
+            <div class="tl-frame">
+              <div class="img-placeholder tl-img">
+                <!-- IMAGE: black_saree_1.jpg — Replace with: <img src="black_saree_1.jpg" alt="Suppu black saree"> -->
+                <div class="ph-label">black_saree_1.jpg</div>
+                <div class="ph-icon">✨</div>
+              </div>
+            </div>
+            <p class="tl-label">Growing luminous</p>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Black saree series -->
+      <div class="saree-strip">
+        <div class="saree-card reveal-card" data-delay="0">
+          <div class="img-placeholder">
+            <!-- IMAGE: black_saree_2.jpg — Replace with: <img src="black_saree_2.jpg" alt="Black saree 2"> -->
+            <div class="ph-label">black_saree_2.jpg</div>
+            <div class="ph-icon">🖤</div>
+          </div>
+        </div>
+        <div class="saree-card reveal-card" data-delay="150">
+          <div class="img-placeholder">
+            <!-- IMAGE: black_saree_3.jpg — Replace with: <img src="black_saree_3.jpg" alt="Black saree 3"> -->
+            <div class="ph-label">black_saree_3.jpg</div>
+            <div class="ph-icon">🌙</div>
+          </div>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- ===== ACT 4: DREAM WORLDS ===== -->
+    <section id="act4" class="act act-dreams">
+      <h2 class="act-heading reveal-text">The World Inside You</h2>
+      <p class="act-sub reveal-text">Every beautiful thing you love lives here.</p>
+
+      <div class="dream-grid">
+        <div class="dream-orb reveal-card" data-delay="0">
+          <div class="orb-icon">🌸</div>
+          <p class="orb-label">Flower Gardens</p>
+          <div class="orb-glow"></div>
+        </div>
+        <div class="dream-orb reveal-card" data-delay="80">
+          <div class="orb-icon">✦</div>
+          <p class="orb-label">Constellations</p>
+          <div class="orb-glow"></div>
+        </div>
+        <div class="dream-orb reveal-card" data-delay="160">
+          <div class="orb-icon">🐱</div>
+          <p class="orb-label">Cats</p>
+          <div class="orb-glow"></div>
+        </div>
+        <div class="dream-orb reveal-card" data-delay="240">
+          <div class="orb-icon">☕</div>
+          <p class="orb-label">Coffee</p>
+          <div class="orb-glow"></div>
+        </div>
+        <div class="dream-orb reveal-card" data-delay="320">
+          <div class="orb-icon">🎵</div>
+          <p class="orb-label">Music</p>
+          <div class="orb-glow"></div>
+        </div>
+        <div class="dream-orb reveal-card" data-delay="400">
+          <div class="orb-icon">🎹</div>
+          <p class="orb-label">Kalimba</p>
+          <div class="orb-glow"></div>
+        </div>
+        <div class="dream-orb reveal-card" data-delay="480">
+          <div class="orb-icon">📓</div>
+          <p class="orb-label">Journaling</p>
+          <div class="orb-glow"></div>
+        </div>
+        <div class="dream-orb reveal-card" data-delay="560">
+          <div class="orb-icon">🔭</div>
+          <p class="orb-label">Astronomy</p>
+          <div class="orb-glow"></div>
+        </div>
+        <div class="dream-orb reveal-card" data-delay="640">
+          <div class="orb-icon">🧶</div>
+          <p class="orb-label">Crochet</p>
+          <div class="orb-glow"></div>
+        </div>
+        <div class="dream-orb easter-egg reveal-card" data-delay="720" title="🐣 You found a secret!">
+          <div class="orb-icon">🌙</div>
+          <p class="orb-label">& Everything</p>
+          <div class="orb-glow"></div>
+        </div>
+      </div>
+
+      <!-- Easter egg message -->
+      <div id="easter-egg-msg" class="hidden">
+        <p>You found the secret! 🐣 Some things in this universe can only be found by someone curious enough to look. Just like you. 🌸</p>
+      </div>
+    </section>
+
+    <!-- ===== ACT 5: HAND-HOLDING REVEAL ===== -->
+    <section id="act5" class="act act-handheld">
+      <div class="thread-approach">
+        <svg id="approach-thread" viewBox="0 0 400 300" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+          <path id="approach-path" d="M200,0 Q50,80 80,150 Q110,220 200,300" fill="none" stroke="#f9a8c9" stroke-width="2" stroke-dasharray="600" stroke-dashoffset="600"/>
+        </svg>
+      </div>
+
+      <div class="handheld-reveal" id="handheld-reveal">
+        <div class="handheld-frame">
+          <div class="img-placeholder handheld-img">
+            <!-- IMAGE: hand_holding.jpg — Replace with: <img src="hand_holding.jpg" alt="Hands held together"> -->
+            <div class="ph-label">hand_holding.jpg</div>
+            <div class="ph-icon">🤝</div>
+          </div>
+        </div>
+        <div class="handheld-message">
+          <p class="handheld-line1">Even when the world leaves you,</p>
+          <p class="handheld-line2">I will be there with you.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== ACT 6: BIRTHDAY FINALE ===== -->
+    <section id="act6" class="act act-finale">
+      <div class="finale-stars" id="finale-stars"></div>
+
+      <div class="finale-center">
+        <svg id="finale-svg" viewBox="0 0 900 220" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
+          <text x="50%" y="58%" text-anchor="middle" class="finale-text-svg" fill="none" stroke="#f9d6e8" stroke-width="1.2">Happy Birthday Suppu</text>
+        </svg>
+
+        <div class="finale-message">
+          <p class="finale-para reveal-text">You are someone who carries whole universes inside you —</p>
+          <p class="finale-para reveal-text">in the way you laugh, the way you love, the way you notice things</p>
+          <p class="finale-para reveal-text">others walk right past.</p>
+          <br/>
+          <p class="finale-para reveal-text">Today, the stars aligned to bring you here.</p>
+          <p class="finale-para reveal-text">And I am so glad they did. 🌸</p>
+          <br/>
+          <p class="finale-big reveal-text">Happy Birthday, Suppu. 🎂✨</p>
+        </div>
+
+        <div class="finale-photos">
+          <div class="finale-photo-frame reveal-card" data-delay="0">
+            <div class="img-placeholder finale-img">
+              <!-- IMAGE: couple_1.jpg — Replace with: <img src="couple_1.jpg" alt="Together"> -->
+              <div class="ph-label">couple_1.jpg</div>
+              <div class="ph-icon">💛</div>
+            </div>
+          </div>
+          <div class="finale-photo-frame reveal-card" data-delay="200">
+            <div class="img-placeholder finale-img">
+              <!-- IMAGE: hand_holding.jpg — Replace with: <img src="hand_holding.jpg" alt="Hands"> -->
+              <div class="ph-label">hand_holding.jpg</div>
+              <div class="ph-icon">🤝</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="finale-yarn-loop" id="finale-yarn"></div>
+      </div>
+    </section>
+
+  </div><!-- end scroll-container -->
+
+  <!-- Cherry blossoms container -->
+  <div id="blossoms-container" aria-hidden="true"></div>
+
+  <!-- Floating doodles -->
+  <div id="doodles-container" aria-hidden="true"></div>
+
+  <!-- Scripts -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script src="scene.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
